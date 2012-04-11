@@ -53,7 +53,7 @@ while True:
 	if not url: break #If it's empty, end the program
 	if not urlparse.urlparse(url).scheme: #If the line isn't a good URL, maybe it just needs an http:// added. Add that.
 		url = "http://"+url
-	m = re.match('http:\/\/(pubs|cen).acs.org.*html', url) #Hey! is this Related Documents fodder?! Then we better sort it out somewhere else.
+	m = re.match('insertspecialcasesitetypehere', url) #Hey! is this a special type fodder?! Then we better sort it out somewhere else.
 	if m:
 		rdurl_list.write(url)
 	else:
