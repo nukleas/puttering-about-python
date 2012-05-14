@@ -10,8 +10,8 @@ opener = urllib2.build_opener()
 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
 ### Open page & generate soup
 ### the "start" variable will be used to iterate through 10pages.
-input=raw_input()
-url = "http://www.google.com/search?q="+input.replace(" ","+")
+search_query=raw_input()
+url = "http://www.google.com/search?q="+search_query.replace(" ","+")
 page = opener.open(url)
 soup = BeautifulSoup(page)
 
@@ -30,8 +30,7 @@ soup2 = BeautifulSoup(page2)
 string=""
 output=open("output.txt",'w')
 for line in soup2.head.title:
-	string+=line.replace("\n","")
-	totalstring=url2.replace("\n","")+'|'+string.replace("\t","")
-	print totalstring.replace(" | ","|")
+	totalstring=url2.strip()+'|'+line.strip()
+	print totalstring
 	output.write(re.sub('[^A-Za-z0-9:\\/.,| &]+', '', totalstring))
 print soup2.head.title

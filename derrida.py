@@ -6,32 +6,11 @@ import re
 import htmlentitydefs
 from sys import argv
 from BeautifulSoup import BeautifulSoup
+from derrida_functions import *
 print "Derrida: a Deconstructionist Program"
 print "Originally in bash, now in Python!"
 scriptname, filename = argv
 url=""
-
-def unescape(text):#Lifted this off effbot.org, it cleans up all those nasty unicode characters. Don't ask me how it works, honestly.
-	def fixup(m):
-		text = m.group(0)
-		if text[:2] == "&#":
-			# character reference
-			try:
-				if text[:3] == "&#x":
-					return unichr(int(text[3:-1], 16))
-				else:
-					return unichr(int(text[2:-1]))
-			except ValueError:
-				pass
-		else:
-            # named entity
-			try:
-				text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
-			except KeyError:
-				pass
-		return text # leave as is
-	return re.sub("&#?\w+;", fixup, text)
-
 rawdata=open(filename) # Open the URL file.
 rawtext=rawdata.read() # Well, read the URL file.
 print re.sub('“|”','\"',rawtext) # Damn those weird quotes!
@@ -39,14 +18,14 @@ URL_results=[] # And lets set up the URL results list.
 for found_URL in re.finditer("(((ht|f)tp(s?))\://)?(www.|[a-zA-Z].)[a-zA-Z0-9\-\.]+\.(com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk)(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*",str(rawtext)):
 	URL_results.append(found_URL.group())
 print URL_results
-URL_file=open("URL",'w')
+URL_file=open("URL.txt",'w')
 for url in URL_results:
 	urltext=url+"\n"
 	URL_file.write(urltext)
 URL_file.close()
-txt=open("URL") # Open the URL file.
+txt=open("URL.txt") # Open the URL file.
 output=open("output.txt",'w') #Open the output file, make it writable
-rdurl_list=open("RDURL",'w')
+rdurl_list=open("RDURL.txt",'w')
 output.truncate() #...but clear it first.
 while True:
 	url=txt.readline()#Pull a line

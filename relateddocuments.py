@@ -1,4 +1,4 @@
-#AutoURL-Related Documents 
+	#AutoURL-Related Documents 
 #By Nukleas
 #This script pulls URLS from a list file, pulls their title using BeautifulSoup, and outputs them into an output file all ready for additional editing
 #
@@ -10,7 +10,7 @@ from BeautifulSoup import BeautifulSoup
 from derrida_functions import *
 pulled_url = ""
 title_set = []
-rd_rawfile=open("RDURL")
+rd_rawfile=open("RDURL.txt")
 while True:
 	pulled_url = rd_rawfile.readline().strip()
 	checked_URL = checkURL(pulled_url)
